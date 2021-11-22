@@ -1,2 +1,2 @@
 # xin4j
-Java wrapper for the XinCraft public API.
+WIP Java wrapper for the XinCraft public API.
