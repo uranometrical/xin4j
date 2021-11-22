@@ -2,19 +2,24 @@ package dev.tomat.xin4j;
 
 import tomat.dev.xin4j.core.ApiResponse;
 import tomat.dev.xin4j.core.XinCraftApi;
-import tomat.dev.xin4j.user.UserInfo;
+import tomat.dev.xin4j.endpoints.player.UserInfo;
+
+import java.util.concurrent.ExecutionException;
 
 public class PrintWinstreak {
     public static void main(String[] args) {
-        XinCraftApi api = new XinCraftApi("key");
-        /*ApiResponse<UserInfo> userInfoResponse = api.getUserInfo("uuid or username");
-
-        if (userInfoResponse.Successful) {
-            UserInfo userInfo = userInfoResponse.Response;
-            System.out.println(userInfo.Statistics.Overall.Winstreak);
+        XinCraftApi api = new XinCraftApi("secret key");
+        while (true)
+        {
+            try {
+                ApiResponse<UserInfo> userInfoResponse = api.getUserInfoFromUsername("metacinnabar").get();
+                if (userInfoResponse.success) {
+                    UserInfo userInfo = userInfoResponse.data;
+                    System.out.println("metacinnabar's current title: " + userInfo.Title);
+                }
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        else {
-            userInfoResponse.Error.printStackTrace();
-        }*/
     }
 }

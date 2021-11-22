@@ -1,15 +1,18 @@
 package tomat.dev.xin4j.core;
 
-public class ApiResponse<T> {
-    public T Response;
-    public Boolean Successful = false;
-    public String Error = "";
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public ApiResponse(Boolean successful, T data, String error) {
-        Successful = successful;
-        if (successful && data != null) {
-            Response = data;
-        }
-        Error = error;
-    }
+/**
+ * Used for every response from the API.
+ * @param <T> The API object deriving from IApiObject
+ */
+public class ApiResponse<T> implements IApiObject {
+    @JsonProperty("success")
+    public Boolean success;
+
+    @JsonProperty("data")
+    public T data;
+
+    @JsonProperty("cause")
+    public String cause;
 }
